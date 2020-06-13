@@ -1,3 +1,6 @@
 $(document).ready(function() {
-    alert("here1");
+    // search button action listener
+    $('#searchBtn').on("click",function() {
+        alert("search!");
+    });
 });
