@@ -1,6 +1,8 @@
 $(document).ready(function() {
     // search button action listener
     $('#searchBtn').on("click",function() {
-        alert("weatherKey: "+weatherKey);
+        alert('here1');
+        var textIn = $('#citySearch');
+        console.log(textIn);
     });
 });

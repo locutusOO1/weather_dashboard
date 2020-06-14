@@ -20,16 +20,104 @@
     </header>
 
     <!-- menu -->
-    <button id="searchBtn" class="btn btn-primary"><i class="fas fa-search fa-lg"></i></button>
+    <div class="container-fluid content">
+        <div class="row">
+            <aside class="col-3">
+                <h5>Search for a City:</h5>
+                <form class="form-inline">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="citySearch" placeholder="Chicago"/>
+                        <button id="searchBtn" class="btn btn-primary"><i class="fas fa-search fa-lg"></i></button>
+                    </div>
+                </form>
+                <div class="prev-searches">
+                    <h5 class="city">
+                        TEST PREV CITIES
+                    </h5>
+                    <h5 class="city">
+                        TEST PREV CITIES
+                    </h5>
+                    <h5 class="city">
+                        TEST PREV CITIES
+                    </h5>
+                    <h5 class="city">
+                        TEST PREV CITIES
+                    </h5>
+                </div>
+            </aside>
+        
+            <!-- main -->
+            <main class="col-9">
+                <!-- current day -->
+                <section class="card cur-day">
+                    <div class="card-body">
+                        <h2 id="city-main">
+                            Current Day
+                        </h2>
+                        <p id="city-temp">
+                            Temperature: 
+                        </p>
+                        <p id="city-temp">
+                            Humidity: 
+                        </p>
+                        <p id="city-temp">
+                            Wind Speed: 
+                        </p>
+                        <p id="city-temp">
+                            UV Index: 
+                        </p>
+                    </div>
+                </section>
 
-    <!-- main -->
-    <main>
-        <!-- current day -->
-        <section></section>
-        <!-- forecast -->
-        <section></section>
-    </main>
-
+                <!-- forecast -->
+                <section class="forcast">
+                    <h3>
+                        5-Day Forcast:
+                    </h3>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="card day1">
+                                <div class="card-body">
+                                    <h6>
+                                        Day 1
+                                    </h6>
+                                </div>
+                            </div>
+                            <div class="card day2">
+                                <div class="card-body">
+                                    <h6>
+                                        Day 1
+                                    </h6>
+                                </div>
+                            </div>
+                            <div class="card day3">
+                                <div class="card-body">
+                                    <h6>
+                                        Day 1
+                                    </h6>
+                                </div>
+                            </div>
+                            <div class="card day4">
+                                <div class="card-body">
+                                    <h6>
+                                        Day 1
+                                    </h6>
+                                </div>
+                            </div>
+                            <div class="card day5">
+                                <div class="card-body">
+                                    <h6>
+                                        Day 1
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        
+        </div>
+    </div>
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <!-- keys -->
