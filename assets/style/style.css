@@ -50,3 +50,17 @@ aside {
     margin: 0;
     padding: 5px;
 }
+
+.hide {
+    visibility: hidden;
+}
+
+#city-uv {
+    color: white;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+.fore-day {
+    background-color: #007bff;
+}
