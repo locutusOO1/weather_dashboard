@@ -68,7 +68,7 @@ $(document).ready(function() {
                 populateSearch(response.name);
                 var curDate = new Date(response.dt*1000).toLocaleDateString('en-US');
                 cityMain.text(response.name + " (" + curDate + ") ");
-                mainIcon.attr("src","http://openweathermap.org/img/w/"+response.weather[0].icon+".png")
+                mainIcon.attr("src","https://openweathermap.org/img/w/"+response.weather[0].icon+".png")
                 mainIcon.removeClass("hide");
                 cityTemp.text(response.main.temp+" "+String.fromCharCode(176)+"F");
                 cityHumidity.text(response.main.humidity+"%");
@@ -103,7 +103,7 @@ $(document).ready(function() {
                     for (var i = 0; i < days.list.length; i++) {
                         if (days.list[i].dt_txt.indexOf(" 15:00:00") > 0) {
                             var curDate = new Date(days.list[i].dt*1000).toLocaleDateString('en-US');
-                            var newCard = $('<div class="card day1 fore-day"><div class="card-body"><h6>'+ curDate +'</h6><img src="http://openweathermap.org/img/w/'+ days.list[i].weather[0].icon +'.png" alt="Weather Icon"><p>Temp: '+ days.list[i].main.temp +' '+String.fromCharCode(176)+'F</p><p>Humidity: '+ days.list[i].main.humidity +'%</p></div></div>');
+                            var newCard = $('<div class="card day1 fore-day"><div class="card-body"><h6>'+ curDate +'</h6><img src="https://openweathermap.org/img/w/'+ days.list[i].weather[0].icon +'.png" alt="Weather Icon"><p>Temp: '+ days.list[i].main.temp +' '+String.fromCharCode(176)+'F</p><p>Humidity: '+ days.list[i].main.humidity +'%</p></div></div>');
                             foreRow.append(newCard);
                         }
                     }
