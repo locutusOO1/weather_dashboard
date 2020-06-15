@@ -18,8 +18,19 @@ $(document).ready(function() {
     // search array
     var searchArr = [];
 
+    // initialize app
+    function init () {
+        if (localStorage.getItem('searchArr')) {
+            searchArr = JSON.parse(localStorage.getItem('searchArr'));
+            txtIn = searchArr[0];
+            getWeather();
+        }
+    }
+
+    // populate search history
     function populateSearch (city) {
         var idx = searchArr.indexOf(city)
+        // if viewing a previously viewed city then move it to the top of the list
         if (idx > -1) {
             searchArr.splice(idx,1);
             searchArr.unshift(city);
@@ -28,15 +39,16 @@ $(document).ready(function() {
                 var newSearch = $('<button class="hist btn btn-default"><h5 class="city">'+ searchArr[i] +'</h5></button>');
                 searchHist.append(newSearch);
             }
+        // add new city to front of the array
         } else {
             searchArr.unshift(city);
             var newSearch = $('<button class="hist btn btn-default"><h5 class="city">'+ city +'</h5></button>');
             searchHist.prepend(newSearch);
         }
+        localStorage.setItem('searchArr',JSON.stringify(searchArr));
         // search history action listeners
         $('.city').on("click",function(event) {
             event.preventDefault();
-            // alert($(this).text());
             txtIn = $(this).text();
             getWeather();
         });
@@ -93,18 +105,22 @@ $(document).ready(function() {
                 });
             })
             .fail(function(error) {
-                console.log(error)
+                searchBox.val("Invalid City");
+                searchBox.focus();
+                searchBox.select();
+
         });
     }
 
     // search button action listener
     $('#searchBtn').on("click",function(event) {
         event.preventDefault();
-        // txtIn = $('#citySearch').val();
         txtIn = searchBox.val();
-        $('#citySearch').val('');
+        searchBox.val('');
         if (txtIn.length > 0) {
             getWeather();
         }
     });
+
+    init();
 });
