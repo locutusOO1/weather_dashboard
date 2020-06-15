@@ -3,6 +3,7 @@ $(document).ready(function() {
     var txtIn = "";
     // search elements
     var searchBox = $('#citySearch');
+    var searchBtn = $('#searchBtn');
     // current day html elements
     var cityMain = $('#city-main');
     var mainIcon = $('#main-icon');
@@ -15,6 +16,7 @@ $(document).ready(function() {
     var foreRow = $('#forecast-row');
     // search history elements
     var searchHist = $('.prev-searches');
+    var clearHist = $('#clear-hist');
     // search array
     var searchArr = [];
 
@@ -22,8 +24,10 @@ $(document).ready(function() {
     function init () {
         if (localStorage.getItem('searchArr')) {
             searchArr = JSON.parse(localStorage.getItem('searchArr'));
-            txtIn = searchArr[0];
-            getWeather();
+            if (searchArr.length > 0) {
+                txtIn = searchArr[0];
+                getWeather();
+            }
         }
     }
 
@@ -113,13 +117,21 @@ $(document).ready(function() {
     }
 
     // search button action listener
-    $('#searchBtn').on("click",function(event) {
+    searchBtn.on("click",function(event) {
         event.preventDefault();
         txtIn = searchBox.val();
         searchBox.val('');
         if (txtIn.length > 0) {
             getWeather();
         }
+    });
+
+    // clear history action listener
+    clearHist.on("click",function(){
+        searchArr = [];
+        localStorage.setItem('searchArr',JSON.stringify(searchArr));
+        searchHist.empty();
+        location.reload();
     });
 
     init();
