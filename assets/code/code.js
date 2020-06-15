@@ -61,7 +61,7 @@ $(document).ready(function() {
 
     // get city weather api call
     function getWeather() {
-        var cityWeather = "http://api.openweathermap.org/data/2.5/weather?q=" + txtIn + "&units=imperial&APPID=" + weather;
+        var cityWeather = "https://api.openweathermap.org/data/2.5/weather?q=" + txtIn + "&units=imperial&APPID=" + weather;
         $.getJSON(cityWeather)
             .done(function(response) {
                 // populate current weather
@@ -74,7 +74,7 @@ $(document).ready(function() {
                 cityHumidity.text(response.main.humidity+"%");
                 cityWind.text(response.wind.speed+" MPH");
                 // get uv
-                var cityUVI = "http://api.openweathermap.org/data/2.5/uvi?lat=" + response.coord.lat + "&lon=" + response.coord.lon + "&units=imperial&APPID=" + weather;
+                var cityUVI = "https://api.openweathermap.org/data/2.5/uvi?lat=" + response.coord.lat + "&lon=" + response.coord.lon + "&units=imperial&APPID=" + weather;
                 $.getJSON(cityUVI)
                     .done(function(json) {
                         // populate uv
@@ -96,7 +96,7 @@ $(document).ready(function() {
                         console.log(error);
                 });
                 // get forecast
-                var cityFore = "http://api.openweathermap.org/data/2.5/forecast?q=" + txtIn + "&units=imperial&APPID=" + weather;
+                var cityFore = "https://api.openweathermap.org/data/2.5/forecast?q=" + txtIn + "&units=imperial&APPID=" + weather;
                 $.getJSON(cityFore,function(days) {
                     foreRow.empty();
                     foreSect.removeClass("hide");
