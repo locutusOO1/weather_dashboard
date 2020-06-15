@@ -63,4 +63,9 @@ aside {
 
 .fore-day {
     background-color: #007bff;
+    color: white;
+}
+
+h6 {
+    font-weight: bold;
 }
