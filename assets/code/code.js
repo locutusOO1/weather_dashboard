@@ -19,36 +19,21 @@ $(document).ready(function() {
     // get city weather api call
     function getWeather() {
         var cityWeather = "http://api.openweathermap.org/data/2.5/weather?q=" + txtIn + "&units=imperial&APPID=" + weatherKey;
-        // console.log(cityWeather);
-        // get main weather
-        // console.log("weather: "+cityWeather);
         $.getJSON(cityWeather)
             .done(function(response) {
-                // console.log(response);
+                // populate current weather
                 var curDate = new Date(response.dt*1000).toLocaleDateString('en-US');
-                // console.log(response.name);
                 cityMain.text(response.name + " (" + curDate + ") ");
                 mainIcon.attr("src","http://openweathermap.org/img/w/"+response.weather[0].icon+".png")
                 mainIcon.removeClass("hide");
-
-                // console.log(response.main.temp);
                 cityTemp.text(response.main.temp+" "+String.fromCharCode(176)+"F");
-
-                // console.log(response.main.humidity);
                 cityHumidity.text(response.main.humidity+"%");
-
-                // console.log(response.wind.speed);
                 cityWind.text(response.wind.speed+" MPH");
-
-                // console.log(response.coord.lat);
-                // console.log(response.coord.lon);
                 // get uv
                 var cityUVI = "http://api.openweathermap.org/data/2.5/uvi?lat=" + response.coord.lat + "&lon=" + response.coord.lon + "&units=imperial&APPID=" + weatherKey;
-                // console.log("UV: "+cityUVI);
                 $.getJSON(cityUVI)
                     .done(function(json) {
-                        // console.log("uv response:");
-                        // console.log(json);
+                        // populate uv
                         cityUV.text(json.value);
                         if (json.value < 3) {
                             cityUV.css("background-color","green");
@@ -68,24 +53,14 @@ $(document).ready(function() {
                 });
                 // get forecast
                 var cityFore = "http://api.openweathermap.org/data/2.5/forecast?q=" + txtIn + "&units=imperial&APPID=" + weatherKey;
-                // console.log("forcast: "+cityFore);
-                $.getJSON(cityFore,function(days){
-                    // console.log("forcast response:");
-                    // console.log(days);
-                    // forecastIdx = 0;
+                $.getJSON(cityFore,function(days) {
                     foreRow.empty();
                     foreSect.removeClass("hide");
                     for (var i = 0; i < days.list.length; i++) {
                         if (days.list[i].dt_txt.indexOf(" 15:00:00") > 0) {
-                            // console.log(days.list[i].dt_txt);
-                            // console.log(days.list[i].dt);
-                            // console.log(days.list[i].main.temp);
-                            // console.log(days.list[i].main.humidity);
-                            // console.log(days.list[i].weather[0].icon);
                             var curDate = new Date(days.list[i].dt*1000).toLocaleDateString('en-US');
                             var newCard = $('<div class="card day1 fore-day"><div class="card-body"><h6>'+ curDate +'</h6><img src="http://openweathermap.org/img/w/'+ days.list[i].weather[0].icon +'.png" alt="Weather Icon"><p>Temp: '+ days.list[i].main.temp +' '+String.fromCharCode(176)+'F</p><p>Humidity: '+ days.list[i].main.humidity +'%</p></div></div>');
                             foreRow.append(newCard);
-
                         }
                     }
                 });
