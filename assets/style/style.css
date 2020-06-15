@@ -44,11 +44,13 @@ aside {
     margin-top: 15px;
 }
 
-.city {
+.hist {
     border: solid 1px;
     border-color: rgb(77, 77, 77);
     margin: 0;
     padding: 5px;
+    width: 100%;
+    text-align: left;
 }
 
 .hide {

@@ -1,7 +1,8 @@
 $(document).ready(function() {
     // global variables
     var txtIn = "";
-    var cityWeather = "http://api.openweathermap.org/data/2.5/weather?q=";
+    // search elements
+    var searchBox = $('#citySearch');
     // current day html elements
     var cityMain = $('#city-main');
     var mainIcon = $('#main-icon');
@@ -12,9 +13,34 @@ $(document).ready(function() {
     // forcast html elements
     var foreSect = $('#fore-section');
     var foreRow = $('#forecast-row');
+    // search history elements
+    var searchHist = $('.prev-searches');
     // search array
     var searchArr = [];
 
+    function populateSearch (city) {
+        var idx = searchArr.indexOf(city)
+        if (idx > -1) {
+            searchArr.splice(idx,1);
+            searchArr.unshift(city);
+            searchHist.empty();
+            for (var i = 0; i < searchArr.length; i++) {
+                var newSearch = $('<button class="hist btn btn-default"><h5 class="city">'+ searchArr[i] +'</h5></button>');
+                searchHist.append(newSearch);
+            }
+        } else {
+            searchArr.unshift(city);
+            var newSearch = $('<button class="hist btn btn-default"><h5 class="city">'+ city +'</h5></button>');
+            searchHist.prepend(newSearch);
+        }
+        // search history action listeners
+        $('.city').on("click",function(event) {
+            event.preventDefault();
+            // alert($(this).text());
+            txtIn = $(this).text();
+            getWeather();
+        });
+    }
 
     // get city weather api call
     function getWeather() {
@@ -22,6 +48,7 @@ $(document).ready(function() {
         $.getJSON(cityWeather)
             .done(function(response) {
                 // populate current weather
+                populateSearch(response.name);
                 var curDate = new Date(response.dt*1000).toLocaleDateString('en-US');
                 cityMain.text(response.name + " (" + curDate + ") ");
                 mainIcon.attr("src","http://openweathermap.org/img/w/"+response.weather[0].icon+".png")
@@ -73,11 +100,11 @@ $(document).ready(function() {
     // search button action listener
     $('#searchBtn').on("click",function(event) {
         event.preventDefault();
-        txtIn = $('#citySearch').val();
+        // txtIn = $('#citySearch').val();
+        txtIn = searchBox.val();
         $('#citySearch').val('');
         if (txtIn.length > 0) {
             getWeather();
         }
-
     });
 });
