@@ -1,1 +1,0 @@
-var weatherKey = "YOUR_API_KEY";
